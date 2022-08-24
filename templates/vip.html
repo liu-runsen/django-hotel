@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>酒店信息管理系统</title>
+    <link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="../static/css/superfish.css">
+	<link rel="stylesheet" href="../static/css/bootstrap-datepicker.min.css">
+	<link rel="stylesheet" href="../static/css/cs-select.css">
+	<link rel="stylesheet" href="../static/css/cs-skin-border.css">
+
+	<link rel="stylesheet" href="../static/css/themify-icons.css">
+	<link rel="stylesheet" href="../static/css/flaticon.css">
+	<link rel="stylesheet" href="../static/css/icomoon.css">
+	<link rel="stylesheet" href="../static/css/flexslider.css">
+    <link rel="stylesheet" href="../static/my.css">
+</head>
+<body>
+<div style="background-color: #dddddd">
+<nav id="fh5co-menu-wrap" role="navigation">
+						<ul class="sf-menu" id="fh5co-primary-menu">
+                            <li><h2 style="color:#ffffff;float: left;padding-top: 8px">酒店管理系统&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2></li>
+							<li><a href="http://127.0.0.1:8000/index">员工管理</a></li>
+							<li><a href="http://127.0.0.1:8000/insert_client" >顾客管理</a></li>
+							<li><a href="http://127.0.0.1:8000/insert_food">餐厅管理</a></li>
+                            <li><a href="http://127.0.0.1:8000/insert_room">客房管理</a></li>
+							<li><a href="http://127.0.0.1:8000/insert_park">停车场管理</a></li>
+                            <li><a href="http://127.0.0.1:8000/insert_vip">会员信息管理</a></li>
+                            <li><a href="http://127.0.0.1:8000/insert_order">餐厅订单管理</a></li>
+                            <li><a href="http://127.0.0.1:8000/insert_accomodation">客房订单管理</a></li>
+
+						</ul>
+
+					</nav>
+<br>
+<br>
+<br>
+<div style="width: 70%;margin-left: 15%;background-color: #ffffff;height: 500px">
+<center>
+    <!--<a href="http://127.0.0.1:8000/insert">-->
+    <div class="logo">
+					<h2>会员信息录入</h2>
+    </div></center>
+
+<form action="/insert_vip/" method="post" style="margin-left:40px">
+
+    <p><label>会员编号&nbsp;:&nbsp;&nbsp;</label><input type="text" name="id" style="width: 500px;height: 25px"/></p>
+    <p><label>会员姓名&nbsp;:&nbsp;&nbsp;</label><input type="text" name="name" style="width: 500px;height: 25px"/></p>
+      <p><label>会员等级&nbsp;:&nbsp;&nbsp;</label><select name="rank">
+        <option value="普通会员">普通会员</option>
+        <option value="高级会员">高级会员</option>
+      </select></p>
+    <p><label>联系方式&nbsp;:&nbsp;&nbsp;</label><input type="text" name="tel" style="width: 500px;height: 25px"/></p>
+        <input type="submit" value="提交">
+
+</form>
+</div><p>&nbsp;</p><p>&nbsp;</p>
+<div style="width: 70%;margin-left: 15%;background-color: #ffffff;height: 500px">
+<center>
+<a href="http://127.0.0.1:8000/show_vip">
+    <div class="logo">
+					<h2>会员信息展示</h2>
+    </div></a>
+    <table border="1" cellspacing="0" style="width: 90%">
+    <tr>
+        <th>会员编号</th>
+        <th>姓名</th>
+        <th>会员等级</th>
+        <th>联系方式</th>
+        <th colspan="2">操作</th>
+    </tr>
+    {% for line in people_list %}
+    <tr>
+        <td class="id">{{line.会员编号}}</td>
+        <td>{{line.姓名}}</td>
+        <td>{{line.会员等级}}</td>
+        <td>{{line.联系方式 }}</td>
+        <td><center><button class="btn btn-primary delete">删除</button></center></td>
+        <td><center><button class="btn btn-primary update">修改</button></center></td>
+    </tr>
+    {% endfor %}
+    </table>
+</center>
+</div><p>&nbsp;</p><p>&nbsp;</p>
+<div style="width: 70%;margin-left: 15%;background-color: #ffffff;height: 500px">
+<center>
+	<h2><a>会员信息查询</a></h2>
+                <form action="/search_vip/" method="post">
+        <p>根据选择的属性查询会员信息</p>
+                    <i></i>&nbsp<select name="columns">
+                        <option value="会员编号">会员编号</option>
+                        <option value="姓名">姓名</option>
+                        <option value="会员等级">会员等级</option>
+                                          </select>
+                    <input type="text" name="value">
+                    <input type="submit">
+                </form>
+        <table >
+        <tbody>
+        <tr>
+            {% for line in  vips %}
+             <td style="display: inline-block">
+                 <a href="{{ line.url}}" target="_blank"><img src="{{ line.image}}" width="160" height="220" /></a><p></p>会员编号：{{line.会员编号}}<br>姓名：{{line.姓名}}<br>会员等级：{{ line.会员等级 }}<br>联系方式：{{ line.联系方式}}
+             </td>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+</center>
+</div>
+</body>
+</body>
+<script src="../static/js/jquery-2.1.4.min.js"></script>
+<script>
+    $(".delete").click(function () {
+        $(this).parent().parent().remove();
+        var id = $(this).parent().siblings(".id").first().html();
+        <!--alert(id);-->
+        $.get('../delete_vip',{'id': id});
+    });
+</script>
+<script>
+    $(".update").click(function () {
+        var ID = $(this).parent().siblings(".id").first();
+        if ($(this).text() == "修改") {
+            $(this).text("完成");
+            ID.next().next().html('<input type=\"text\" class=\"rank\"/>');
+            ID.next().next().next().html('<input type=\"text\" class=\"tel\"/>');
+        }
+        else{
+            var id = ID.html();
+            var rank = ID.next().next().children().val();
+            var tel = ID.next().next().next().children().val();
+            var vip = {'id':id, 'rank':rank, 'tel': tel};
+            $.post('../update_vip/',vip, function(res){
+                location.reload();
+            });
+        }
+    });
+</script>
+</html>

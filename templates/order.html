@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>酒店管理系统</title>
+    <link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="../static/css/superfish.css">
+	<link rel="stylesheet" href="../static/css/bootstrap-datepicker.min.css">
+	<link rel="stylesheet" href="../static/css/cs-select.css">
+	<link rel="stylesheet" href="../static/css/cs-skin-border.css">
+
+	<link rel="stylesheet" href="../static/css/themify-icons.css">
+	<link rel="stylesheet" href="../static/css/flaticon.css">
+	<link rel="stylesheet" href="../static/css/icomoon.css">
+	<link rel="stylesheet" href="../static/css/flexslider.css">
+    <link rel="stylesheet" href="../static/my.css">
+</head>
+<body>
+<div style="background-color: #dddddd">
+<nav id="fh5co-menu-wrap" role="navigation">
+						<ul class="sf-menu" id="fh5co-primary-menu">
+                            <li><h2 style="color:#ffffff;float: left;padding-top: 8px">酒店管理系统&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2></li>
+							<li><a href="http://127.0.0.1:8000/index">员工管理</a></li>
+							<li><a href="http://127.0.0.1:8000/insert_client" >顾客管理</a></li>
+							<li><a href="http://127.0.0.1:8000/insert_food">餐厅管理</a></li>
+                            <li><a href="http://127.0.0.1:8000/insert_room">客房管理</a></li>
+							<li><a href="http://127.0.0.1:8000/insert_park">停车场管理</a></li>
+                            <li><a href="http://127.0.0.1:8000/insert_vip">会员信息管理</a></li>
+                            <li><a href="http://127.0.0.1:8000/insert_order">餐厅订单管理</a></li>
+                            <li><a href="http://127.0.0.1:8000/insert_accomodation">客房订单管理</a></li>
+
+						</ul>
+
+					</nav>
+<br>
+<br>
+<br>
+<div style="width: 70%;margin-left: 15%;background-color: #ffffff;height: 500px">
+<center>
+
+    <div class="logo">
+					<h2>餐饮订单信息录入</h2>
+    </div>
+</center>
+<form action="/insert_order/" method="post" style="margin-left:40px">
+
+         <p><label>订单编号：</label><input type="text" name="id" style="width: 500px;height: 25px"/></p>
+         <p><label>顾客编号：</label><input type="text" name="client" style="width: 500px;height: 25px"/></p>
+         <p><label>菜品编号：</label><input type="text" name="food" style="width: 500px;height: 25px"/></p>
+         <p><label>服务员号：</label><input type="text" name="waiter" style="width: 500px;height: 25px"/></p>
+         <p><label>服务桌号：</label><input type="text" name="table" style="width: 500px;height: 25px"/></p>
+        <input type="submit" value="提交">
+
+</form>
+</div><p>&nbsp;</p><p>&nbsp;</p>
+<div style="width: 70%;margin-left: 15%;background-color: #ffffff;height: 500px">
+<center>
+<a href="http://127.0.0.1:8000/show_order">
+    <div class="logo">
+					<h2>订单信息展示</h2>
+    </div></a>
+    <table border="1" cellspacing="0" style="width: 90%">
+    <tr>
+        <th>编号</th>
+        <th>顾客编号</th>
+        <th>菜品编号</th>
+        <th>服务员编号</th>
+        <th>桌号</th>
+        <th>操作</th>
+    </tr>
+    {% for line in people_list %}
+    <tr>
+        <td class="id">{{line.id}}</td>
+        <td>{{line.顾客编号.顾客id}}</td>
+        <td>{{line.菜品编号.菜品编号}}</td>
+        <td>{{line.服务员编号.员工id}}</td>
+        <td>{{line.桌号}}</td>
+        <td><center><button class="btn btn-primary delete">删除</button></center></td>
+        <!--<td><button class="btn btn-primary update">修改</button></td>-->
+    </tr>
+    {% endfor %}
+    </table>
+</center>
+</div><p>&nbsp;</p><p>&nbsp;</p>
+<div style="width: 70%;margin-left: 15%;background-color: #ffffff;height: 500px">
+<center>
+    <h2>根据顾客编号查询顾客餐饮消费情况</h2>
+    <form action="/search_order/" method="post">
+        <label>顾客编号：</label><input type="text" name="id"/>&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="submit" value="提交">
+    </form><br/><br/>
+     <table border="1" cellspacing="0" style="width: 90%">
+    <tr>
+        <th>消费菜品</th>
+        <th>单价</th>
+    </tr>
+    {% for line in food_list %}
+    <tr>
+        <td>{{line.菜名}}</td>
+        <td>{{line.价格}}</td>
+    </tr>
+    {% endfor %}
+    </table>
+</center>
+</div>
+</div>
+</body>
+<script src="../static/js/jquery-2.1.4.min.js"></script>
+<script>
+    $(".delete").click(function () {
+        $(this).parent().parent().remove();
+        var id = $(this).parent().siblings(".id").first().html();
+        alert(id);
+        $.get('../delete_order',{'id': id});
+    });
+</script>
+</html>

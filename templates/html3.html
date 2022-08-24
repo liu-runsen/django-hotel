@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>酒店管理系统 </title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="../static/css/superfish.css">
+	<link rel="stylesheet" href="../static/css/bootstrap-datepicker.min.css">
+	<link rel="stylesheet" href="../static/css/cs-select.css">
+	<link rel="stylesheet" href="../static/css/cs-skin-border.css">
+
+	<link rel="stylesheet" href="../static/css/themify-icons.css">
+	<link rel="stylesheet" href="../static/css/flaticon.css">
+	<link rel="stylesheet" href="../static/css/icomoon.css">
+	<link rel="stylesheet" href="../static/css/flexslider.css">
+
+	<!-- Style -->
+	<link rel="stylesheet" href="../static/css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="../static/js/modernizr-2.6.2.min.js"></script>
+
+	<script src="../static/js/respond.min.js"></script>
+	<![endif]-->
+</head>
+<style type="text/css">
+    #bg {
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+    }
+
+    #bg img {
+        position:absolute;
+        left:0;
+        right:0;
+        bottom:0;
+        margin:auto;
+        width:100%;
+        height:100%;
+        z-index:-1;
+    }
+    </style>
+
+<body>
+	<div id="fh5co-page"id="bg">
+
+        <img src="../static/images/slider1.jpg" alt="">
+
+	<div id="fh5co-header">
+		<header id="fh5co-header-section">
+			<div class="container">
+				<div class="nav-header">
+					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
+					<h1 id="fh5co-logo"><a href="index.html">欢迎使用本酒店管理系统</a></h1>
+					<nav id="fh5co-menu-wrap" role="navigation">
+						<ul class="sf-menu" id="fh5co-primary-menu">
+							<li><a href="index.html">员工管理</a></li>
+							<li>
+								<a href="http://127.0.0.1:8000/insert_client/" class="fh5co-sub-ddown">顾客管理</a>
+								<ul class="fh5co-sub-menu">
+								 	<li><a href="#">Luxe Hotel</a></li>
+								 	<li><a href="#">Deluxe Hotel</a></li>
+									<li>
+										<a href="#" class="fh5co-sub-ddown">King Hotel</a>
+										<ul class="fh5co-sub-menu">
+											<li><a href="#/preview/?item=build-free-html5-bootstrap-template" target="_blank">Build</a></li>
+											<li><a href="#/preview/?item=work-free-html5-template-bootstrap" target="_blank">Work</a></li>
+											<li><a href="#/preview/?item=light-free-html5-template-bootstrap" target="_blank">Light</a></li>
+											<li><a href="#/preview/?item=relic-free-html5-template-using-bootstrap" target="_blank">Relic</a></li>
+											<li><a href="#/preview/?item=display-free-html5-template-using-bootstrap" target="_blank">Display</a></li>
+											<li><a href="#/preview/?item=sprint-free-html5-template-bootstrap" target="_blank">Sprint</a></li>
+										</ul>
+									</li>
+									<li><a href="#">Five Star Hotel</a></li>
+								</ul>
+							</li>
+							<li><a href="services.html">餐厅管理</a></li>
+							<li><a class="active" href="blog.html">停车场管理</a></li>
+							<li><a href="contact.html">客房管理</a></li>
+						</ul>
+					</nav>
+                     <center>
+<a href="http://127.0.0.1:8000/index">
+    <div class="logo">
+        <br>
+        <br>
+        <br>
+					<h2>员工信息展示</h2>
+    </div></a>
+    <table border="1">
+    <tr>
+        <th>工号</th>
+        <th>姓名</th>
+        <th>职务</th>
+        <th>月薪/元</th>
+        <th>工龄/年</th>
+    </tr>
+    {% for line in people_list %}
+    <tr>
+        <td>{{line.员工id}}</td>
+        <td>{{line.姓名}}</td>
+        <td>{{line.职务}}</td>
+        <td>{{line.月薪 }}</td>
+        <td>{{line.工龄 }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+</center>
+				</div>
+			</div>
+		</header>
+
+	</div>
+	<!-- end:fh5co-header -->
+	<div class="fh5co-parallax" style="background-image: url(images/slider1.jpg);../static/../static/../static///" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-center fh5co-table">
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
